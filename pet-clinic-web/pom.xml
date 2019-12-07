@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>cz.danielson</groupId>
-            <artifactId>sfg-pet-clinic</artifactId>
+            <artifactId>pet-clinic-data</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
@@ -45,6 +45,12 @@
                     <artifactId>junit-vintage-engine</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.5.2</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
