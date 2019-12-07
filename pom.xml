@@ -14,7 +14,7 @@
     </parent>
     <groupId>cz.danielson</groupId>
     <artifactId>sfg-pet-clinic</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.4-SNAPSHOT</version>
     <name>sfg-pet-clinic</name>
     <description>SFG Pet CLinic Project</description>
 
@@ -41,7 +41,7 @@
 
     <scm>
         <developerConnection>scm:git:https://github.com/danielsonn/sfg-pet-clinic.git</developerConnection>
-      <tag>0.0.3</tag>
+      <tag>HEAD</tag>
   </scm>
 
 </project>
