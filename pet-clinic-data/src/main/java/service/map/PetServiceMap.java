@@ -1,9 +1,9 @@
 package service.map;
 
 import cz.danielson.sfgpetclinic.model.Pet;
-import service.CrudService;
+import service.PetService;
 
-public class PetMapService extends AbstractMapService<Pet, Long> implements CrudService<Pet, Long> {
+public class PetServiceMap extends AbstractMapService<Pet, Long> implements PetService {
     @Override
     public Pet save(Pet object) {
         return super.save(object.getId(), object);
