@@ -5,17 +5,15 @@ import cz.danielson.sfgpetclinic.model.Vet;
 import org.springframework.boot.CommandLineRunner;
 import service.OwnerService;
 import service.VetService;
-import service.map.OwnerServiceMap;
-import service.map.VetServiceMap;
 
-public class DataLoader implements CommandLineRunner{
+public class DataLoader implements CommandLineRunner {
 
     private OwnerService ownerService;
     private VetService vetService;
 
-    public DataLoader() {
-        ownerService = new OwnerServiceMap();
-        vetService = new VetServiceMap();
+    public DataLoader(OwnerService ownerService, VetService vetService) {
+        this.ownerService = ownerService;
+        this.vetService = vetService;
     }
 
     @Override
