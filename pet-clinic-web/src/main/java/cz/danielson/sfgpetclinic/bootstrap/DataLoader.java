@@ -3,9 +3,11 @@ package cz.danielson.sfgpetclinic.bootstrap;
 import cz.danielson.sfgpetclinic.model.Owner;
 import cz.danielson.sfgpetclinic.model.Vet;
 import org.springframework.boot.CommandLineRunner;
-import service.OwnerService;
-import service.VetService;
+import cz.danielson.sfgpetclinic.service.OwnerService;
+import cz.danielson.sfgpetclinic.service.VetService;
+import org.springframework.stereotype.Component;
 
+@Component
 public class DataLoader implements CommandLineRunner {
 
     private OwnerService ownerService;
@@ -20,12 +22,14 @@ public class DataLoader implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         Owner owner1 = new Owner();
+        owner1.setId(1L);
         owner1.setFirstName("Michael");
         owner1.setLastName("Weston");
 
         ownerService.save(owner1);
 
         Owner owner2 = new Owner();
+        owner2.setId(2L);
         owner2.setFirstName("Fiona");
         owner2.setLastName("Glenanne");
 

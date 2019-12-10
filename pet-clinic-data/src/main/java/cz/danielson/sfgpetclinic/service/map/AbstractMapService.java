@@ -1,4 +1,4 @@
-package service.map;
+package cz.danielson.sfgpetclinic.service.map;
 
 import java.util.HashMap;
 import java.util.HashSet;

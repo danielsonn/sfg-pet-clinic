@@ -1,8 +1,8 @@
-package service.map;
+package cz.danielson.sfgpetclinic.service.map;
 
 import cz.danielson.sfgpetclinic.model.Vet;
+import cz.danielson.sfgpetclinic.service.VetService;
 import org.springframework.stereotype.Service;
-import service.VetService;
 
 @Service
 public class VetServiceMap extends AbstractMapService<Vet, Long> implements VetService {

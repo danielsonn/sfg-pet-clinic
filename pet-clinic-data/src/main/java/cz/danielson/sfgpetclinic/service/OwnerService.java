@@ -1,4 +1,4 @@
-package service;
+package cz.danielson.sfgpetclinic.service;
 
 import cz.danielson.sfgpetclinic.model.Owner;
 
