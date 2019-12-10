@@ -1,5 +1,6 @@
 package cz.danielson.sfgpetclinic.controller;
 
+import cz.danielson.sfgpetclinic.service.VetService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,9 +10,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/vets")
 public class VetController {
 
+    private VetService vetService;
+
+    public VetController(VetService vetService) {
+        this.vetService = vetService;
+    }
+
     @GetMapping("")
     public String listVets(Model model){
-        model.addAttribute("list", "ahoj");
+        model.addAttribute("vets", vetService.findAll());
 
         return "vets/index";
     }
