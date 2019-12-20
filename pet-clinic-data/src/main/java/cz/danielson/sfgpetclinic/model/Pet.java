@@ -21,7 +21,6 @@ public class Pet extends NamedEntity {
     private Owner owner;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pet")
-    @JoinColumn(name = "visit_id")
     private Set<Visit> visits = new HashSet<>();
 
     public LocalDate getBirthDate() {
