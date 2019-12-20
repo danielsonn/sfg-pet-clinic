@@ -1,13 +1,15 @@
 package cz.danielson.sfgpetclinic.controller;
 
+import cz.danielson.sfgpetclinic.service.OwnerService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import cz.danielson.sfgpetclinic.service.OwnerService;
 
 @Controller
 @RequestMapping("/owners")
+@Slf4j
 public class OwnerController {
 
     private OwnerService ownerService;
