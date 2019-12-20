@@ -1,10 +1,7 @@
 package cz.danielson.sfgpetclinic.bootstrap;
 
 import cz.danielson.sfgpetclinic.model.*;
-import cz.danielson.sfgpetclinic.service.OwnerService;
-import cz.danielson.sfgpetclinic.service.PetTypeService;
-import cz.danielson.sfgpetclinic.service.SpecialityService;
-import cz.danielson.sfgpetclinic.service.VetService;
+import cz.danielson.sfgpetclinic.service.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -17,12 +14,14 @@ public class DataLoader implements CommandLineRunner {
     private VetService vetService;
     private PetTypeService petTypeService;
     private SpecialityService specialityService;
+    private VisitService visitService;
 
-    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialityService specialityService) {
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialityService specialityService, VisitService visitService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.specialityService = specialityService;
+        this.visitService = visitService;
     }
 
     @Override
@@ -101,6 +100,12 @@ public class DataLoader implements CommandLineRunner {
         vet2.getSpecialities().add(radiologySpeciality);
 
         vetService.save(vet2);
+
+        Visit visit = new Visit();
+        visit.setPet(mikePet);
+        visit.setDescription("Stomach ache");
+        visit.setDate(LocalDate.now());
+        visitService.save(visit);
 
         System.out.println("Loaded Vets....");
     }
