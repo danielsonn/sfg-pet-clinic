@@ -11,6 +11,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -44,21 +46,10 @@ class OwnerControllerTest {
     }
 
     @Test
-    void listOwners() throws Exception {
-        when(ownerService.findAll()).thenReturn(inputOwners);
-
-        mockMvc.perform(get("/owners/"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("/owners/index"))
-                .andExpect(model().attribute("owners", hasSize(2)));
-        verify(ownerService).findAll();
-    }
-
-    @Test
     void findOwners() throws Exception {
         mockMvc.perform(get("/owners/find"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("notimplemented"));
+                .andExpect(view().name("owners/findOwners"));
         verifyNoInteractions(ownerService);
     }
 
@@ -70,4 +61,33 @@ class OwnerControllerTest {
                 .andExpect(view().name("/owners/detail"))
                 .andExpect(model().attribute("owner", hasProperty("id", is(1L))));
     }
+
+    @Test
+    public void findFormReturnMany() throws Exception{
+        when(ownerService.findAllByLastName(anyString())).thenReturn(Arrays.asList(Owner.builder().id(1L).build(), Owner.builder().id(2L).build()));
+
+        mockMvc.perform(get("/owners").param("lastName", ""))
+                .andExpect(status().isOk())
+                .andExpect(view().name("/owners/index"))
+                .andExpect(model().attribute("owners", hasSize(2)));
+    }
+
+    @Test
+    public void findFormReturnOne() throws Exception{
+        when(ownerService.findAllByLastName(anyString())).thenReturn(Arrays.asList(Owner.builder().id(1L).lastName("Newman").build()));
+
+        mockMvc.perform(get("/owners").param("lastName", ""))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/owners/1"));
+    }
+
+    @Test
+    public void findFormReturnNone() throws Exception{
+        when(ownerService.findAllByLastName(anyString())).thenReturn(new ArrayList());
+
+        mockMvc.perform(get("/owners").param("lastName", ""))
+                .andExpect(status().isOk())
+                .andExpect(view().name("owners/findOwners"));
+    }
+
 }
