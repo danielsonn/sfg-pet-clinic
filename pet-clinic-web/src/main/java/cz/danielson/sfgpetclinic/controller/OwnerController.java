@@ -1,17 +1,17 @@
 package cz.danielson.sfgpetclinic.controller;
 
+import cz.danielson.sfgpetclinic.exception.NotFoundException;
 import cz.danielson.sfgpetclinic.model.Owner;
 import cz.danielson.sfgpetclinic.service.OwnerService;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -98,6 +98,21 @@ public class OwnerController {
             Owner savedOwner = ownerService.save(owner);
             return REDIRECT_OWNERS + savedOwner.getId();
         }
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NotFoundException.class)
+    public ModelAndView handleNotFound(Exception exception){
+
+        log.error("Handling not found exception");
+        log.error(exception.getMessage());
+
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.setViewName("errors/404");
+        modelAndView.addObject("exception", exception);
+
+        return modelAndView;
     }
 
 }

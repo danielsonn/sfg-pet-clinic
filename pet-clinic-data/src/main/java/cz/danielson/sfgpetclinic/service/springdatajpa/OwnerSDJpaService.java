@@ -1,5 +1,6 @@
 package cz.danielson.sfgpetclinic.service.springdatajpa;
 
+import cz.danielson.sfgpetclinic.exception.NotFoundException;
 import cz.danielson.sfgpetclinic.model.Owner;
 import cz.danielson.sfgpetclinic.repository.OwnerRepository;
 import cz.danielson.sfgpetclinic.service.OwnerService;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -39,7 +41,13 @@ public class OwnerSDJpaService implements OwnerService {
 
     @Override
     public Owner findById(Long id) {
-        return ownerRepository.findById(id).orElse(null);
+        Optional<Owner> ownerOptional = ownerRepository.findById(id);
+
+        if (!ownerOptional.isPresent()) {
+            throw new NotFoundException("Recipe Not Found. For ID value: " + id);
+        }
+
+        return ownerOptional.get();
     }
 
     @Override
