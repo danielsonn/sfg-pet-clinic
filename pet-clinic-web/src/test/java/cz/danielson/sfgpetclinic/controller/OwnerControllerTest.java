@@ -75,6 +75,13 @@ class OwnerControllerTest {
     }
 
     @Test
+    void getOwnerInvalidNumber() throws Exception {
+        mockMvc.perform(get("/owners/noid"))
+                .andExpect(status().isBadRequest())
+                .andExpect(view().name("/errors/400"));
+    }
+
+    @Test
     void initCreationForm() throws Exception {
         mockMvc.perform(get("/owners/new"))
                 .andExpect(status().isOk())

@@ -115,4 +115,19 @@ public class OwnerController {
         return modelAndView;
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(NumberFormatException.class)
+    public ModelAndView handleNumberFormat(Exception exception){
+
+        log.error("Handling number format exception");
+        log.error(exception.getMessage());
+
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.setViewName("/errors/400");
+        modelAndView.addObject("exception", exception);
+
+        return modelAndView;
+    }
+
 }
