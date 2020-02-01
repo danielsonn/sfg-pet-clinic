@@ -1,5 +1,6 @@
 package cz.danielson.sfgpetclinic.controller;
 
+import cz.danielson.sfgpetclinic.exception.NotFoundException;
 import cz.danielson.sfgpetclinic.model.Owner;
 import cz.danielson.sfgpetclinic.service.OwnerService;
 import org.junit.jupiter.api.BeforeEach;
@@ -63,6 +64,14 @@ class OwnerControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("/owners/detail"))
                 .andExpect(model().attribute("owner", hasProperty("id", is(1L))));
+    }
+
+    @Test
+    void getOwnerNotFound() throws Exception {
+        when(ownerService.findById(anyLong())).thenThrow(NotFoundException.class);
+        mockMvc.perform(get("/owners/10"))
+                .andExpect(status().isNotFound())
+                .andExpect(view().name("/errors/404"));
     }
 
     @Test

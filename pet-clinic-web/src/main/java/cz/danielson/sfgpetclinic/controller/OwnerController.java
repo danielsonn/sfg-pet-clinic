@@ -109,7 +109,7 @@ public class OwnerController {
 
         ModelAndView modelAndView = new ModelAndView();
 
-        modelAndView.setViewName("errors/404");
+        modelAndView.setViewName("/errors/404");
         modelAndView.addObject("exception", exception);
 
         return modelAndView;
