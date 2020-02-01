@@ -46,6 +46,7 @@ class OwnerControllerTest {
 
         mockMvc = MockMvcBuilders
                 .standaloneSetup(ownerController)
+                .setControllerAdvice(new ControllerExceptionHandler())
                 .build();
     }
 
